@@ -23,21 +23,9 @@ services:
       - "SUBSCRIPTION_JSON_FILENAME=subscription.json"
       - "SUBSCRIPTION_JSON_PATH=/o2k-connector/data"
       - "SUBSCRIPTION_SCHEMA_FILE_PATH=/o2k-connector/data/subscription.schema.json"
-      - "REDIS_HOST=redis"
-      - "REDIS_PORT=6379"
-      - "REDIS_PASSWORD=eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81"
     volumes:
       - ./conf:/o2k-connector/data
       - ./logs:/o2k-connector/logs
-    
-  redis:
-    image: redis:7.0.2
-    hostname: redis
-    networks:
-      - hostnet
-    ports:
-      - '6379:6379'
-    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
 
 networks:
   hostnet:

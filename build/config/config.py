@@ -3,6 +3,8 @@
 import os 
 import logging
 
+subscriptionsIds = []
+
 # Environment Variables
 LOG_LEVEL = os.getenv('LOG_LEVEL')
 if LOG_LEVEL is None:

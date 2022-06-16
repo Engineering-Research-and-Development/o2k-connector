@@ -1,6 +1,6 @@
 from functools import cache
 from config.config import ORION_HOST, ORION_PORT, FIWARE_SERVICE, FIWARE_SERVICEPATH, \
-    SUBSCRIPTION_JSON_PATH, SUBSCRIPTION_JSON_FILENAME
+    SUBSCRIPTION_JSON_PATH, SUBSCRIPTION_JSON_FILENAME, subscriptionsIds
 import requests
 from config.config import logger
 from services.Validator import Validator
@@ -18,9 +18,8 @@ class Subscription:
             if(r.status_code == 201):
                 subscriptionId = str(r.headers["location"].split("/")[3])
                 logger.info('Subscription success with id: ' + subscriptionId)
-                cache = Cache()
-                cache.setSubscriptionId(subscriptionId)
-                logger.info('Saved subscription in redis: ' + str(cache.getSubscriptionId()))
+                subscriptionsIds.append(subscriptionId)
+                logger.info('Saved subscription in cache: ' + str(subscriptionsIds))
             else:
                 logger.error('Subscription failed ' + str(r))
         else:

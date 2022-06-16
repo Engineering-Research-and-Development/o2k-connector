@@ -32,9 +32,3 @@ class Watcher:
         observer = Observer()
         observer.schedule(event_handler, SUBSCRIPTION_JSON_PATH, recursive=True)
         observer.start()
-        try:
-            while True:
-                time.sleep(2)
-        except KeyboardInterrupt:
-            observer.stop()
-        observer.join()

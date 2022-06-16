@@ -3,4 +3,3 @@ confluent-kafka[avro,json,protobuf]>=1.8.2
 requests==2.27.1
 watchdog==2.1.9
 jsonschema==4.6.0
-redis==4.3.3
