@@ -1,0 +1,45 @@
+version: "3"
+services:
+
+  o2k-connector:
+    image: o2k-connector
+    build: ./build
+    hostname: o2k-connector
+    networks:
+      - hostnet
+    ports:
+      - "5050:5050"
+    environment:
+      - "LOG_LEVEL=INFO"
+      - "LOGS_PATH=/o2k-connector/logs"
+      - "O2K_HOST=0.0.0.0"
+      - "O2K_PORT=5050" # the same as exposed port
+      - "SCHEMA_URL=http://schema-registry:8081" # Kafka schema-registry url
+      - "BOOTSTRAP_SERVERS=broker-1:29092,broker-2:29093,broker-3:29094" # bootstrap servers
+      - "ORION_HOST=orion" # hotname of orion context broker
+      - "ORION_PORT=1026" # port of orion context broker
+      - "FIWARE_SERVICE=opcua_car" # fiware-service attribute
+      - "FIWARE_SERVICEPATH=/demo" # fiware-servicepath attribute
+      - "SUBSCRIPTION_JSON_FILENAME=subscription.json"
+      - "SUBSCRIPTION_JSON_PATH=/o2k-connector/data"
+      - "SUBSCRIPTION_SCHEMA_FILE_PATH=/o2k-connector/data/subscription.schema.json"
+      - "REDIS_HOST=redis"
+      - "REDIS_PORT=6379"
+      - "REDIS_PASSWORD=eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81"
+    volumes:
+      - ./conf:/o2k-connector/data
+      - ./logs:/o2k-connector/logs
+    
+  redis:
+    image: redis:7.0.2
+    hostname: redis
+    networks:
+      - hostnet
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+
+networks:
+  hostnet:
+    external:
+      name: network-bridge

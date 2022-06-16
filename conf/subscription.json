@@ -1,0 +1,27 @@
+{
+  "description": "Car subscription",
+  "subject": {
+    "entities": [
+      {
+        "idPattern": "age01_Car",
+        "type": "Device"
+      }
+    ],
+    "condition": {
+      "attrs": [
+        "Engine_Oxigen",
+        "Engine_Temperature"
+      ]
+    }
+  },
+  "notification": {
+    "http": {
+      "url": "http://o2k-connector:5050/notify"
+    },
+    "attrs": [
+      "Engine_Oxigen",
+      "Engine_Temperature"
+    ]
+  },
+  "throttling": 1
+}

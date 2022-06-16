@@ -1,0 +1,158 @@
+{
+  "$schema": "http://telefonicaid.github.io/fiware-orion/api/v2/stable/",
+  "type": "object",
+  "properties": {
+    "description": {
+      "type": "string"
+    },
+    "subject": {
+      "type": "object",
+      "properties": {
+        "entities": {
+          "type": "array",
+          "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "idPattern": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "typePattern": {
+                  "type": "string"
+                }
+              },
+              "oneOf": [
+                { "required": ["id", "type"] },
+                { "required": ["id", "typePattern"] },
+                { "required": ["idPattern", "type"] },
+                { "required": ["idPattern", "typePattern"] }
+              ]
+            }
+        },
+        "condition": {
+          "type": "object",
+          "properties": {
+            "attrs": {
+              "type": "array",
+              "items":
+                {
+                  "type": "string"
+                }
+            },
+            "expression": {
+              "type": "object",
+              "properties": {
+                "q": {
+                  "type": "string"
+                },
+                "mq": {
+                  "type": "string"
+                },
+                "georel": {
+                  "type": "string"
+                },
+                "geometry": {
+                  "type": "string"
+                },
+                "coords": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "required": [
+            "attrs"
+          ]
+        }
+      },
+      "required": [
+        "entities"
+      ]
+    },
+    "notification": {
+      "type": "object",
+      "properties": {
+        "http": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "url"
+          ]
+        },
+        "httpCustom": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string"
+            },
+            "headers": {
+              "type": "object",
+              "properties": {
+                "X-MyHeader": {
+                  "type": "string"
+                }
+              }
+            },
+            "qs": {
+              "type": "object",
+              "properties": {
+                "authToken": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "attrs": {
+          "type": "array",
+          "items": {
+              "type": "string"
+            }
+        },
+        "exceptAttrs": {
+          "type": "array",
+          "items": {
+              "type": "string"
+            }
+        },
+        "attrsFormat": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "array",
+          "items": {
+              "type": "string"
+            }
+        }
+      },
+      "oneOf": [
+        { "required": ["attrs", "http"] },
+        { "required": ["attrs", "httpCustom"] },
+        { "required": ["exceptAttrs", "http"] },
+        { "required": ["exceptAttrs", "httpCustom"] }
+      ]
+    },
+    "expires": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "throttling": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "subject",
+    "notification"
+  ]
+}
