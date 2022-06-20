@@ -22,7 +22,7 @@ class EventHandler(FileSystemEventHandler):
             self.last_modified = datetime.now()
             logger.info(f'event type: {event.event_type}  path : {event.src_path}')
             if SUBSCRIPTION_JSON_FILENAME in event.src_path:
-                subscription.createOrionSubscription()
+                subscription.updateOrionSubscription()
 
 class Watcher:
     def run(self):
