@@ -39,7 +39,7 @@ class Subscription:
         jsonSubscription = open(SUBSCRIPTION_JSON_PATH + '/' + SUBSCRIPTION_JSON_FILENAME, 'r').read()
         isValid = validator.validateOrionSubscriptionJSON(jsonSubscription)
         if isValid:
-            r = requests.post(url, data=jsonSubscription, headers=headers)
+            r = requests.patch(url, data=jsonSubscription, headers=headers)
             if(r.status_code == 201):
                 subscriptionId = str(r.headers["location"].split("/")[3])
                 logger.info('Subscription success with id: ' + subscriptionId)
