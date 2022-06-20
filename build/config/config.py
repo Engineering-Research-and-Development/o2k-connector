@@ -73,30 +73,22 @@ if SUBSCRIPTION_JSON_PATH is None:
     print("SUBSCRIPTION_JSON_PATH env is missing. Reverting back to default value.")
     SUBSCRIPTION_JSON_PATH="../conf"
 
-SUBSCRIPTION_JSON_FILENAME = os.getenv('SUBSCRIPTION_JSON_FILENAME')
-if SUBSCRIPTION_JSON_FILENAME is None:
-    print("SUBSCRIPTION_JSON_FILENAME env is missing. Reverting back to default value.")
-    SUBSCRIPTION_JSON_FILENAME="subscription.json"
+SUBSCRIPTION_JSON_FILENAME="subscription.json"
 
 SUBSCRIPTION_SCHEMA_FILE_PATH = os.getenv('SUBSCRIPTION_SCHEMA_FILE_PATH')
 if SUBSCRIPTION_SCHEMA_FILE_PATH is None:
     print("SUBSCRIPTION_SCHEMA_FILE_PATH env is missing. Reverting back to default value.")
     SUBSCRIPTION_SCHEMA_FILE_PATH="../conf/subscription.schema.json"
 
-REDIS_HOST = os.getenv('REDIS_HOST')
-if REDIS_HOST is None:
-    print("REDIS_HOST env is missing. Reverting back to default value.")
-    REDIS_HOST="localhost"
+SUBSCRIPTION_SCHEMA_FILE_PATH_LD = os.getenv('SUBSCRIPTION_SCHEMA_FILE_PATH_LD')
+if SUBSCRIPTION_SCHEMA_FILE_PATH_LD is None:
+    print("SUBSCRIPTION_SCHEMA_FILE_PATH_LD env is missing. Reverting back to default value.")
+    SUBSCRIPTION_SCHEMA_FILE_PATH_LD="../conf/subscription-ld.schema.json"
 
-REDIS_PORT = os.getenv('REDIS_PORT')
-if REDIS_PORT is None:
-    print("REDIS_PORT env is missing. Reverting back to default value.")
-    REDIS_PORT="6379"
-
-REDIS_PASSWORD = os.getenv('REDIS_PASSWORD')
-if REDIS_PASSWORD is None:
-    print("REDIS_PASSWORD env is missing. Reverting back to default value.")
-    REDIS_PASSWORD="eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81"
+ORION_VERSION = os.getenv('ORION_VERSION')
+if ORION_VERSION is None:
+    print("ORION_VERSION env is missing. Reverting back to default value.")
+    ORION_VERSION="V2"
 
 # Logger
 DEFAULT_LOG_FILENAME = "logs.log"
