@@ -6,6 +6,7 @@ from config.config import logger
 from services.Validator import Validator
 
 class Subscription:
+
     # V2
     def createOrionSubscription(self):
         if len(subscriptionsIds) > 0:
@@ -57,15 +58,14 @@ class Subscription:
             logger.error('Cannot create a new subscription, already exists: ' + str(subscriptionsIds))
             return
         validator = Validator()
-        url = 'http://{0}:{1}/v1/contextSubscriptions'.format(ORION_HOST, ORION_PORT)
+        url = 'http://{0}:{1}/ngsi-ld/v1/subscriptions'.format(ORION_HOST, ORION_PORT)
         headers = {'Accept' : 'application/json', 'Content-Type' : 'application/json'}
         jsonSubscription = open(SUBSCRIPTION_JSON_PATH + '/' + SUBSCRIPTION_JSON_FILENAME, 'r').read()
         isValid = validator.validateOrionSubscriptionJSON(jsonSubscription)
         if isValid:
             r = requests.post(url, data=jsonSubscription, headers=headers)
             if(r.status_code == 201):
-                json = r.json()
-                subscriptionId = str(json['subscribeResponse']['subscriptionId'])
+                subscriptionId = str(r.headers["location"].split("/")[-1])
                 logger.info('Subscription success with id: ' + subscriptionId)
                 subscriptionsIds.append(subscriptionId)
                 logger.info('Saved subscription in cache: ' + str(subscriptionsIds))
@@ -79,20 +79,16 @@ class Subscription:
             logger.error('Cannot update subscription, create a new one first.')
             return
         subscriptionId = subscriptionsIds[0]
-        validator = Validator()
-        url = 'http://{0}:{1}/v1/contextSubscriptions/{2}'.format(ORION_HOST, ORION_PORT, subscriptionId)
-        headers = {'Accept' : 'application/json', 'Content-Type' : 'application/json'}
-        jsonSubscription = open(SUBSCRIPTION_JSON_PATH + '/' + SUBSCRIPTION_JSON_FILENAME, 'r').read()
-        isValid = validator.validateOrionSubscriptionJSON(jsonSubscription)
-        if isValid:
-            r = requests.put(url, data=jsonSubscription, headers=headers)
-            if(r.status_code == 201):
-                json = r.json()
-                subscriptionId = str(json['subscribeResponse']['subscriptionId'])
-                logger.info('Subscription success with id: ' + subscriptionId)
-                subscriptionsIds[0] = subscriptionId
-                logger.info('Saved subscription in cache: ' + str(subscriptionsIds))
-            else:
-                logger.error('Subscription failed ' + str(r))
+        # Delete existing subscription request
+        url = 'http://{0}:{1}/ngsi-ld/v1/subscriptions/{2}'.format(ORION_HOST, ORION_PORT, subscriptionId)
+        headers = {'Accept' : 'application/json'}
+        r = requests.delete(url, headers=headers)
+        if(r.status_code == 204):
+            logger.info('Subscription deleted with id: ' + subscriptionId)
+            subscriptionsIds = []
+            logger.info('Removed subscription from cache: ' + str(subscriptionsIds))
+            # Create new subscription request
+            self.createOrionLDSubscription()
         else:
-            logger.error('Invalid schema for ' + SUBSCRIPTION_JSON_FILENAME)
+            logger.error('Delete subscription failed ' + str(r.content))
+            return

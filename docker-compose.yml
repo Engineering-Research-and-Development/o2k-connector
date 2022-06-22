@@ -23,6 +23,8 @@ services:
       - "SUBSCRIPTION_JSON_FILENAME=subscription.json"
       - "SUBSCRIPTION_JSON_PATH=/o2k-connector/data"
       - "SUBSCRIPTION_SCHEMA_FILE_PATH=/o2k-connector/data/subscription.schema.json"
+      - "SUBSCRIPTION_SCHEMA_FILE_PATH_LD=/o2k-connector/data/subscription-ld.schema.json"
+      - "ORION_VERSION=V2" # orion version V2 or LD
     volumes:
       - ./conf:/o2k-connector/data
       - ./logs:/o2k-connector/logs

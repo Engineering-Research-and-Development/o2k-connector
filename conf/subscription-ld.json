@@ -1,0 +1,23 @@
+{
+  "type": "Subscription",
+  "name": "Car-Subscription",
+  "description": "Car subscription",
+  "entities": [
+    {
+      "idPattern": "age01_Car",
+      "type": "Device"
+    }
+  ],
+  "watchedAttributes": [
+    "Engine_Oxigen"
+  ],
+  "notification": {
+    "attributes": [
+      "Engine_Oxigen"
+    ],
+    "format": "keyValues",
+    "endpoint": {
+      "uri": "http://o2k-connector:5050/notify"
+    }
+  }
+}
