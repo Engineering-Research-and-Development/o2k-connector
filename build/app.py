@@ -2,7 +2,7 @@ import cherrypy
 from services.Subscription import Subscription
 from services.Watcher import Watcher
 from services.Api import Notification, cherrypy
-from config.config import subscriptionsIds, ORION_VERSION
+from config.config import ORION_VERSION
 
 
 if __name__ == '__main__':
@@ -14,5 +14,5 @@ if __name__ == '__main__':
     subscription.createOrionSubscription()
   
   watcher = Watcher()
-  watcher.run()
+  watcher.run(subscription)
   cherrypy.quickstart(Notification())

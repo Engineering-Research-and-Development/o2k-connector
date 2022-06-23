@@ -4,15 +4,15 @@ from watchdog.events import FileSystemEventHandler
 from datetime import datetime, timedelta
 from config.config import SUBSCRIPTION_JSON_PATH, SUBSCRIPTION_JSON_FILENAME, ORION_VERSION
 from config.config import logger
-from services.Subscription import Subscription
 
 # Watcher workaround for Windows Docker not triggering file changes
 # https://github.com/cosmtrek/air/issues/190
 
-subscription = Subscription()
-
 class EventHandler(FileSystemEventHandler):
-    def __init__(self):
+    subscription = None
+
+    def __init__(self, subscription):
+        self.subscription = subscription
         self.last_modified = datetime.now()
 
     def on_modified(self, event):
@@ -23,15 +23,15 @@ class EventHandler(FileSystemEventHandler):
             logger.info(f'event type: {event.event_type}  path : {event.src_path}')
             if SUBSCRIPTION_JSON_FILENAME in event.src_path:
                 if ORION_VERSION=='LD':
-                    subscription.updateOrionLDSubscription()
+                    self.subscription.updateOrionLDSubscription()
                 else:
-                    subscription.updateOrionSubscription()
+                    self.subscription.updateOrionSubscription()
 
 class Watcher:
-    def run(self):
+    def run(self, subscription):
         logger.info('Starting Watchdog')
         logger.info('Watching dir: ' + SUBSCRIPTION_JSON_PATH + '/' + SUBSCRIPTION_JSON_FILENAME)
-        event_handler = EventHandler()
+        event_handler = EventHandler(subscription)
         observer = Observer()
         observer.schedule(event_handler, SUBSCRIPTION_JSON_PATH, recursive=True)
         observer.start()
