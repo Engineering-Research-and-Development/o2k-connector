@@ -26,7 +26,7 @@ class Subscription:
                 subscriptionsIds.append(subscriptionId)
                 logger.info('Saved subscription in cache: ' + str(subscriptionsIds))
             else:
-                logger.error('Subscription failed ' + str(r))
+                logger.error('Subscription failed ' + str(r.content))
         else:
             logger.error('Invalid schema for ' + SUBSCRIPTION_JSON_FILENAME)
     
@@ -48,7 +48,7 @@ class Subscription:
                 subscriptionsIds[0] = subscriptionId
                 logger.info('Saved subscription in cache: ' + str(subscriptionsIds))
             else:
-                logger.error('Subscription failed ' + str(r))
+                logger.error('Subscription failed ' + str(r.content))
         else:
             logger.error('Invalid schema for ' + SUBSCRIPTION_JSON_FILENAME)
     
@@ -70,7 +70,7 @@ class Subscription:
                 subscriptionsIds.append(subscriptionId)
                 logger.info('Saved subscription in cache: ' + str(subscriptionsIds))
             else:
-                logger.error('Subscription failed ' + str(r))
+                logger.error('Subscription failed ' + str(r.content))
         else:
             logger.error('Invalid schema for ' + SUBSCRIPTION_JSON_FILENAME)
     
