@@ -25,7 +25,27 @@ class Notification(object):
         entity = data['id'].lower()
         entity_type = data['type'].lower()
 
+        # V2 Topic generation strategy
         ngsi_topic = service + "_" + service_path + "_" + entity + "_" + entity_type
+        ngsi_message = data
+
+        logger.info("Producing data records to topic: " + str(ngsi_topic))
+        logger.info(ngsi_message)
+
+        producer.produce(topic=ngsi_topic, message=ngsi_message)
+  
+  @cherrypy.expose
+  @cherrypy.tools.json_out()
+  @cherrypy.tools.json_in()
+  def notifyld(self):
+    input_json = cherrypy.request.json
+
+    for data in input_json['data']:
+        
+        subscriptionId = data['subscriptionId'].replace(':','_').lower()
+
+        # LD Topic generation strategy
+        ngsi_topic = subscriptionId
         ngsi_message = data
 
         logger.info("Producing data records to topic: " + str(ngsi_topic))

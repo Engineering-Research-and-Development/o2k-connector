@@ -4,20 +4,22 @@
   "description": "Car subscription",
   "entities": [
     {
-      "idPattern": "age01_Car",
+      "id": "urn:ngsi-ld:Device:age01_Car",
       "type": "Device"
     }
   ],
   "watchedAttributes": [
-    "Engine_Oxigen"
+    "Engine_Oxigen",
+    "Engine_Temperature"
   ],
   "notification": {
     "attributes": [
-      "Engine_Oxigen"
+      "Engine_Oxigen",
+      "Engine_Temperature"
     ],
     "format": "keyValues",
     "endpoint": {
-      "uri": "http://o2k-connector:5050/notify"
+      "uri": "http://o2k-connector:5050/notifyld"
     }
   }
 }
