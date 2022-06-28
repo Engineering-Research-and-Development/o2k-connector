@@ -73,6 +73,11 @@ if SUBSCRIPTION_JSON_PATH is None:
 
 SUBSCRIPTION_JSON_FILENAME="subscription.json"
 
+MULTIPLE_SUBSCRIPTIONS = os.getenv('MULTIPLE_SUBSCRIPTIONS')
+if MULTIPLE_SUBSCRIPTIONS is None:
+    print("MULTIPLE_SUBSCRIPTIONS env is missing. Reverting back to default value.")
+    MULTIPLE_SUBSCRIPTIONS="false"
+
 SUBSCRIPTION_SCHEMA_FILE_PATH = os.getenv('SUBSCRIPTION_SCHEMA_FILE_PATH')
 if SUBSCRIPTION_SCHEMA_FILE_PATH is None:
     print("SUBSCRIPTION_SCHEMA_FILE_PATH env is missing. Reverting back to default value.")
