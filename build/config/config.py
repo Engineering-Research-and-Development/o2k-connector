@@ -2,6 +2,7 @@
 
 import os 
 import logging
+import sys
 
 # Environment Variables
 LOG_LEVEL = os.getenv('LOG_LEVEL')
@@ -108,4 +109,9 @@ file_handler = logging.FileHandler(LOGS_PATH + "/" + DEFAULT_LOG_FILENAME)
 file_handler.setLevel(logging.DEBUG)
 file_handler.setFormatter(formatter)
 
+ch = logging.StreamHandler(sys.stdout)
+ch.setLevel(logging.DEBUG)
+ch.setFormatter(formatter)
+
 logger.addHandler(file_handler)
+logger.addHandler(ch)
