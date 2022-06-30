@@ -1,5 +1,5 @@
 import cherrypy
-from config.config import O2K_HOST, O2K_PORT
+from config.config import O2K_HOST, O2K_PORT, KAFKA_TOPIC
 from config.config import logger
 from services.Producer import Producer
 
@@ -25,8 +25,11 @@ class Notification(object):
         entity = data['id'].lower()
         entity_type = data['type'].lower()
 
-        # V2 Topic generation strategy
-        ngsi_topic = service + "_" + service_path + "_" + entity + "_" + entity_type
+        ngsi_topic = KAFKA_TOPIC
+        if KAFKA_TOPIC is None :
+          # V2 Topic generation strategy
+          ngsi_topic = service + "_" + service_path + "_" + entity + "_" + entity_type
+
         ngsi_message = data
 
         logger.info("Producing data records to topic: " + str(ngsi_topic))

@@ -40,6 +40,10 @@ if BOOTSTRAP_SERVERS is None:
     print("BOOTSTRAP_SERVERS env is missing. Reverting back to default value.")
     BOOTSTRAP_SERVERS = "localhost:9092,localhost:9093,localhost:9094"
 
+KAFKA_TOPIC = os.getenv('KAFKA_TOPIC')
+if KAFKA_TOPIC is None:
+    print("KAFKA_TOPIC env is missing. Reverting back to default kafka topic generation procedure.")
+
 ORION_HOST = os.getenv('ORION_HOST')
 if ORION_HOST is None:
     print("ORION_HOST env is missing. Reverting back to default value.")
