@@ -8,6 +8,7 @@ from confluent_kafka.error import SerializationError
 from config.config import SCHEMA_URL, BOOTSTRAP_SERVERS
 from config.config import logger
 
+
 class Serializer():
     def __init__(self, codec='utf_8'):
         self.codec = codec
@@ -19,6 +20,7 @@ class Serializer():
             return dumps(obj).encode(self.codec)
         except _struct.error as e:
             raise SerializationError(str(e))
+
 
 class Producer:
     def __init__(self, message_format='json', schema=None):
@@ -34,9 +36,9 @@ class Producer:
             serializer = AvroSerializer(schema_registry_client, schema_str)
 
         producer_conf = {'bootstrap.servers': BOOTSTRAP_SERVERS,
-                        'key.serializer': StringSerializer('utf_8'),
-                        'value.serializer': serializer,
-                        'queue.buffering.max.messages': 1000000}
+                         'key.serializer': StringSerializer('utf_8'),
+                         'value.serializer': serializer,
+                         'queue.buffering.max.messages': 1000000}
 
         self.producer = SerializingProducer(producer_conf)
 
@@ -56,8 +58,8 @@ class Producer:
         for row in df_dict:
             self.producer.poll(0.0)
             try:
-                self.producer.produce(topic=topic, key=str(key) , value=row, on_delivery=self.delivery_report)
-                #self.producer.produce(topic=topic, key=str(key) , value=row)
+                self.producer.produce(topic=topic, key=str(key), value=row, on_delivery=self.delivery_report)
+                # self.producer.produce(topic=topic, key=str(key) , value=row)
             except KeyboardInterrupt:
                 break
 

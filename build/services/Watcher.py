@@ -1,10 +1,9 @@
-import time
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 from datetime import datetime, timedelta
-from config.config import SUBSCRIPTION_JSON_PATH, SUBSCRIPTION_JSON_FILENAME, SUBSCRIPTION_JSON_FILENAME_LD, \
-    ORION_VERSION
+from config.config import SUBSCRIPTION_JSON_PATH, ORION_VERSION
 from config.config import logger
+
 
 # Watcher workaround for Windows Docker not triggering file changes
 # https://github.com/cosmtrek/air/issues/190

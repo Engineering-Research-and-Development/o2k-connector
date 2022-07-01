@@ -11,6 +11,7 @@ class Validator:
             jsonData = json.loads(jsonString)
             jsonSchema = json.loads(open(SUBSCRIPTION_SCHEMA_FILE_PATH, 'rb').read()) if ORION_VERSION=="V2" \
                 else json.loads(open(SUBSCRIPTION_SCHEMA_FILE_PATH_LD, 'rb').read())
+            validate(instance=jsonData, schema=jsonSchema)
         except jsonschema.exceptions.ValidationError as validationErr:
             logger.error(validationErr)
             return False
