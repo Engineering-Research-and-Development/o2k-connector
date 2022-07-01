@@ -10,7 +10,14 @@ from services.Validator import Validator
 class Subscription:
     subscriptionsIds = []
 
-    def sendSubscriptionRequest(self, url, data, headers):
+    def sendPATCHSubscriptionV2Request(self, url, data, headers, subscriptionId):
+        r = requests.patch(url + '/' + subscriptionId, data=data, headers=headers)
+        if r.status_code == 204:
+            logger.info('Subscription updated with id: ' + subscriptionId)
+        else:
+            logger.error('Subscription failed ' + str(r.content))
+
+    def sendPOSTSubscriptionV2Request(self, url, data, headers):
         r = requests.post(url, data=data, headers=headers)
         if r.status_code == 201:
             subscriptionId = str(r.headers["location"].split("/")[3])
@@ -55,9 +62,9 @@ class Subscription:
             if MULTIPLE_SUBSCRIPTIONS == "true":
                 jsonSubscriptions = self.splitAttrsForSubscription(json.loads(jsonSubscription))
                 for jsonSub in jsonSubscriptions:
-                    self.sendSubscriptionRequest(url, json.dumps(jsonSub), headers)
+                    self.sendPOSTSubscriptionV2Request(url, json.dumps(jsonSub), headers)
             else:
-                self.sendSubscriptionRequest(url, jsonSubscription, headers)
+                self.sendPOSTSubscriptionV2Request(url, jsonSubscription, headers)
         else:
             logger.error('Invalid schema for ' + SUBSCRIPTION_JSON_FILENAME)
 
@@ -67,7 +74,7 @@ class Subscription:
             return
         subscriptionId = self.subscriptionsIds[0]
         validator = Validator()
-        url = 'http://{0}:{1}/v2/subscriptions/{2}'.format(ORION_HOST, ORION_PORT, subscriptionId)
+        url = 'http://{0}:{1}/v2/subscriptions'.format(ORION_HOST, ORION_PORT)
         headers = {'Accept': 'application/json', 'Content-Type': 'application/json', 'Fiware-Service': FIWARE_SERVICE,
                    'Fiware-ServicePath': FIWARE_SERVICEPATH}
         jsonSubscription = open(SUBSCRIPTION_JSON_PATH + '/' + SUBSCRIPTION_JSON_FILENAME, 'r').read()
@@ -76,23 +83,9 @@ class Subscription:
             if MULTIPLE_SUBSCRIPTIONS == "true":
                 jsonSubscriptions = self.splitAttrsForSubscription(json.loads(jsonSubscription))
                 for index, jsonSub in enumerate(jsonSubscriptions):
-                    r = requests.patch(url, data=json.dumps(jsonSub), headers=headers)
-                    if r.status_code == 201:
-                        subscriptionId = str(r.headers["location"].split("/")[3])
-                        logger.info('Subscription success with id: ' + subscriptionId)
-                        self.subscriptionsIds[index] = subscriptionId
-                        logger.info('Saved subscription in cache: ' + str(self.subscriptionsIds))
-                    else:
-                        logger.error('Subscription failed ' + str(r.content))
+                    self.sendPATCHSubscriptionV2Request(url, json.dumps(jsonSub), headers, subscriptionId)
             else:
-                r = requests.patch(url, data=jsonSubscription, headers=headers)
-                if r.status_code == 201:
-                    subscriptionId = str(r.headers["location"].split("/")[3])
-                    logger.info('Subscription success with id: ' + subscriptionId)
-                    self.subscriptionsIds[0] = subscriptionId
-                    logger.info('Saved subscription in cache: ' + str(self.subscriptionsIds))
-                else:
-                    logger.error('Subscription failed ' + str(r.content))
+                self.sendPATCHSubscriptionV2Request(url, jsonSubscription, headers, subscriptionId)
         else:
             logger.error('Invalid schema for ' + SUBSCRIPTION_JSON_FILENAME)
 

@@ -3,7 +3,7 @@
   "subject": {
     "entities": [
       {
-        "idPattern": "age01_Car",
+        "id": "age01_Car",
         "type": "Device"
       }
     ],
