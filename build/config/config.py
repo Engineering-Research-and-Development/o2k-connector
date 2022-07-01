@@ -76,7 +76,15 @@ if SUBSCRIPTION_JSON_PATH is None:
     print("SUBSCRIPTION_JSON_PATH env is missing. Reverting back to default value.")
     SUBSCRIPTION_JSON_PATH="../conf"
 
-SUBSCRIPTION_JSON_FILENAME="subscription.json"
+SUBSCRIPTION_JSON_FILENAME = os.getenv('SUBSCRIPTION_JSON_FILENAME')
+if SUBSCRIPTION_JSON_FILENAME is None:
+    print("SUBSCRIPTION_JSON_FILENAME env is missing. Reverting back to default value.")
+    SUBSCRIPTION_JSON_FILENAME="subscription.json"
+
+SUBSCRIPTION_JSON_FILENAME_LD = os.getenv('SUBSCRIPTION_JSON_FILENAME_LD')
+if SUBSCRIPTION_JSON_FILENAME_LD is None:
+    print("SUBSCRIPTION_JSON_FILENAME_LD env is missing. Reverting back to default value.")
+    SUBSCRIPTION_JSON_FILENAME_LD="subscription-ld.json"
 
 MULTIPLE_SUBSCRIPTIONS = os.getenv('MULTIPLE_SUBSCRIPTIONS')
 if MULTIPLE_SUBSCRIPTIONS is None:

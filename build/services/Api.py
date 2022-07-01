@@ -40,15 +40,17 @@ class Notification(object):
   @cherrypy.expose
   @cherrypy.tools.json_out()
   @cherrypy.tools.json_in()
-  def notifyld(self):
+  def notifyld(self, subscriptionId):
+    logger.info('LD notification incoming')
     input_json = cherrypy.request.json
 
     for data in input_json['data']:
         
-        subscriptionId = data['subscriptionId'].replace(':','_').lower()
+        ngsi_topic = KAFKA_TOPIC
+        if KAFKA_TOPIC is None:
+            # LD Topic generation strategy
+            ngsi_topic = data['id'].replace(':', '_').lower()
 
-        # LD Topic generation strategy
-        ngsi_topic = subscriptionId
         ngsi_message = data
 
         logger.info("Producing data records to topic: " + str(ngsi_topic))

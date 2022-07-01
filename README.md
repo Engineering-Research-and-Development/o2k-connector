@@ -46,7 +46,12 @@ docker-compose up
       <tr>
           <td>POST</td>
           <td>/notify</td>
-          <td>Context data ingestion route</td>
+          <td>V2 Context data ingestion route</td>
+      </tr>
+        <tr>
+          <td>POST</td>
+          <td>/notifyld?subscriptionId=urn:ngsi-ld:Type:Entity</td>
+          <td>LD Context data ingestion route</td>
       </tr>
   </tbody>
 </table>

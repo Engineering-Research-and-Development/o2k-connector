@@ -3,7 +3,7 @@ import json
 import copy
 from ssl import ALERT_DESCRIPTION_BAD_CERTIFICATE_HASH_VALUE
 from config.config import ORION_HOST, ORION_PORT, FIWARE_SERVICE, FIWARE_SERVICEPATH, \
-    SUBSCRIPTION_JSON_PATH, SUBSCRIPTION_JSON_FILENAME, MULTIPLE_SUBSCRIPTIONS
+    SUBSCRIPTION_JSON_PATH, SUBSCRIPTION_JSON_FILENAME, SUBSCRIPTION_JSON_FILENAME_LD, MULTIPLE_SUBSCRIPTIONS
 import requests
 from config.config import logger
 from services.Validator import Validator
@@ -107,8 +107,8 @@ class Subscription:
             return
         validator = Validator()
         url = 'http://{0}:{1}/ngsi-ld/v1/subscriptions'.format(ORION_HOST, ORION_PORT)
-        headers = {'Accept' : 'application/json', 'Content-Type' : 'application/json'}
-        jsonSubscription = open(SUBSCRIPTION_JSON_PATH + '/' + SUBSCRIPTION_JSON_FILENAME, 'r').read()
+        headers = {'Accept' : 'application/json', 'Content-Type' : 'application/ld+json'}
+        jsonSubscription = open(SUBSCRIPTION_JSON_PATH + '/' + SUBSCRIPTION_JSON_FILENAME_LD, 'r').read()
         isValid = validator.validateOrionSubscriptionJSON(jsonSubscription)
         if isValid:
             r = requests.post(url, data=jsonSubscription, headers=headers)
@@ -120,7 +120,7 @@ class Subscription:
             else:
                 logger.error('Subscription failed ' + str(r.content))
         else:
-            logger.error('Invalid schema for ' + SUBSCRIPTION_JSON_FILENAME)
+            logger.error('Invalid schema for ' + SUBSCRIPTION_JSON_FILENAME_LD)
     
     def updateOrionLDSubscription(self):
         if self.subscriptionsIds is None or len(self.subscriptionsIds) <= 0:
@@ -139,4 +139,3 @@ class Subscription:
             self.createOrionLDSubscription()
         else:
             logger.error('Delete subscription failed ' + str(r.content))
-            return
