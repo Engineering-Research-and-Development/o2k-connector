@@ -19,7 +19,7 @@ class MQTTConsumer:
             client.on_message = self.on_message_ld
 
         client.connect(MQTT_HOST, MQTT_PORT, 60)
-
+        logger.info('Connected to mqtt instance at host:' + MQTT_HOST + ", port: " + MQTT_PORT )
         # Blocking call that processes network traffic, dispatches callbacks and
         # handles reconnecting.
         # Other loop*() functions are available that give a threaded interface and a
@@ -33,12 +33,12 @@ class MQTTConsumer:
 
         # Subscribing in on_connect() means that if we lose the connection and
         # reconnect then subscriptions will be renewed.
-        logger.info(MQTT_TOPIC)
         client.subscribe(MQTT_TOPIC)
+        logger.info('mqtt subscription to topic: ' + MQTT_TOPIC)
 
     # The callback for when a PUBLISH message is received from the server.
     def on_message(self, client, userdata, msg):
-
+        logger.info('V2 mqtt notification incoming')
         service = str(FIWARE_SERVICE).lower()
         service_path = str(FIWARE_SERVICEPATH).replace('/', '').lower()
 
@@ -61,6 +61,7 @@ class MQTTConsumer:
 
     # The LD callback for when a PUBLISH message is received from the server.
     def on_message_ld(self, client, userdata, msg):
+        logger.info('LD mqtt notification incoming')
 
         for data in json.loads(msg.payload)['data']:
 

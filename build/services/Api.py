@@ -14,6 +14,7 @@ class Notification(object):
     @cherrypy.tools.json_out()
     @cherrypy.tools.json_in()
     def notify(self):
+        logger.info('V2 http notification incoming')
         input_json = cherrypy.request.json
 
         service = str(FIWARE_SERVICE).lower()
@@ -40,7 +41,7 @@ class Notification(object):
     @cherrypy.tools.json_out()
     @cherrypy.tools.json_in()
     def notifyld(self, subscriptionId):
-        logger.info('LD notification incoming')
+        logger.info('LD http notification incoming')
         input_json = cherrypy.request.json
 
         for data in input_json['data']:

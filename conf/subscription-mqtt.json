@@ -1,20 +1,16 @@
 {
-  "description": "age01_Rover subscription",
+  "description": "age01_Car subscription",
   "subject": {
     "entities": [
       {
-        "idPattern": "age01_Rover",
-        "type": "WoodworkingMachine"
+        "idPattern": "age01_Car",
+        "type": "Device"
       }
     ],
     "condition": {
       "attrs": [
-        "AbsoluteRunsGood",
-        "AbsoluteRunsTotal",
-        "AbsoluteWorkingTime",
-        "AbsoluteFailLCycCnt",
-        "AbsoluteFailUnlCycCnt",
-        "AbsoluteAuToolChangeCnt"
+        "Engine_Oxigen",
+        "Engine_Temperature"
       ]
     }
   },
@@ -25,12 +21,8 @@
       "qos": 2
     },
     "attrs": [
-      "AbsoluteRunsGood",
-      "AbsoluteRunsTotal",
-      "AbsoluteWorkingTime",
-      "AbsoluteFailLCycCnt",
-      "AbsoluteFailUnlCycCnt",
-      "AbsoluteAuToolChangeCnt"
+      "Engine_Oxigen",
+      "Engine_Temperature"
     ]
   },
   "throttling": 1
