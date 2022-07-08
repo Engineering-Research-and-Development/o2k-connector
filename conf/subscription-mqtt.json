@@ -1,0 +1,37 @@
+{
+  "description": "age01_Rover subscription",
+  "subject": {
+    "entities": [
+      {
+        "idPattern": "age01_Rover",
+        "type": "WoodworkingMachine"
+      }
+    ],
+    "condition": {
+      "attrs": [
+        "AbsoluteRunsGood",
+        "AbsoluteRunsTotal",
+        "AbsoluteWorkingTime",
+        "AbsoluteFailLCycCnt",
+        "AbsoluteFailUnlCycCnt",
+        "AbsoluteAuToolChangeCnt"
+      ]
+    }
+  },
+  "notification": {
+    "mqtt": {
+      "url": "mqtt://mosquitto:1883",
+      "topic": "example_mosquitto_topic",
+      "qos": 2
+    },
+    "attrs": [
+      "AbsoluteRunsGood",
+      "AbsoluteRunsTotal",
+      "AbsoluteWorkingTime",
+      "AbsoluteFailLCycCnt",
+      "AbsoluteFailUnlCycCnt",
+      "AbsoluteAuToolChangeCnt"
+    ]
+  },
+  "throttling": 1
+}

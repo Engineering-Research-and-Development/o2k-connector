@@ -1,5 +1,5 @@
 import cherrypy
-from config.config import O2K_HOST, O2K_PORT, KAFKA_TOPIC
+from config.config import O2K_HOST, O2K_PORT, KAFKA_TOPIC, FIWARE_SERVICE, FIWARE_SERVICEPATH
 from config.config import logger
 from services.Producer import Producer
 
@@ -8,7 +8,6 @@ cherrypy.config.update({'server.socket_port': O2K_PORT})
 
 producer = Producer()
 
-
 class Notification(object):
 
     @cherrypy.expose
@@ -16,10 +15,9 @@ class Notification(object):
     @cherrypy.tools.json_in()
     def notify(self):
         input_json = cherrypy.request.json
-        input_headers = cherrypy.request.headers
 
-        service = input_headers['Fiware-Service'].lower()
-        service_path = input_headers['Fiware-Servicepath'].replace('/', '').lower()
+        service = str(FIWARE_SERVICE).lower()
+        service_path = str(FIWARE_SERVICEPATH).replace('/', '').lower()
 
         for data in input_json['data']:
 

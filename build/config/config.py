@@ -71,6 +71,26 @@ if FIWARE_SERVICEPATH is None:
     print("FIWARE_SERVICEPATH env is missing. Reverting back to default value.")
     FIWARE_SERVICEPATH = "/demo"
 
+MQTT_HOST = os.getenv('MQTT_HOST')
+if MQTT_HOST is None:
+    print("MQTT_HOST env is missing. Reverting back to default value.")
+    MQTT_HOST = "localhost"
+
+MQTT_PORT = os.getenv('MQTT_PORT')
+if MQTT_PORT is None:
+    print("MQTT_PORT env is missing. Reverting back to default value.")
+    MQTT_PORT = 1883
+else:
+    try:
+        MQTT_PORT = int(MQTT_PORT)
+    except ValueError:
+        print("MQTT_PORT env could not be casted into Integer. Reverting back to default value.")
+        MQTT_PORT = 1883
+
+MQTT_TOPIC = os.getenv('MQTT_TOPIC')
+if MQTT_TOPIC is None:
+    print("MQTT_TOPIC env is missing. Reverting back to default mqtt topic generation procedure.")
+
 SUBSCRIPTION_JSON_PATH = os.getenv('SUBSCRIPTION_JSON_PATH')
 if SUBSCRIPTION_JSON_PATH is None:
     print("SUBSCRIPTION_JSON_PATH env is missing. Reverting back to default value.")
@@ -85,6 +105,16 @@ SUBSCRIPTION_JSON_FILENAME_LD = os.getenv('SUBSCRIPTION_JSON_FILENAME_LD')
 if SUBSCRIPTION_JSON_FILENAME_LD is None:
     print("SUBSCRIPTION_JSON_FILENAME_LD env is missing. Reverting back to default value.")
     SUBSCRIPTION_JSON_FILENAME_LD = "subscription-ld.json"
+
+SUBSCRIPTION_JSON_FILENAME_MQTT = os.getenv('SUBSCRIPTION_JSON_FILENAME_MQTT')
+if SUBSCRIPTION_JSON_FILENAME_MQTT is None:
+    print("SUBSCRIPTION_JSON_FILENAME_MQTT env is missing. Reverting back to default value.")
+    SUBSCRIPTION_JSON_FILENAME_MQTT = "subscription-mqtt.json"
+
+SUBSCRIPTION_JSON_FILENAME_MQTT_LD = os.getenv('SUBSCRIPTION_JSON_FILENAME_MQTT_LD')
+if SUBSCRIPTION_JSON_FILENAME_MQTT_LD is None:
+    print("SUBSCRIPTION_JSON_FILENAME_MQTT_LD env is missing. Reverting back to default value.")
+    SUBSCRIPTION_JSON_FILENAME_MQTT_LD = "subscription-mqtt-ld.json"
 
 MULTIPLE_SUBSCRIPTIONS = os.getenv('MULTIPLE_SUBSCRIPTIONS')
 if MULTIPLE_SUBSCRIPTIONS is None:
@@ -101,10 +131,20 @@ if SUBSCRIPTION_SCHEMA_FILE_PATH_LD is None:
     print("SUBSCRIPTION_SCHEMA_FILE_PATH_LD env is missing. Reverting back to default value.")
     SUBSCRIPTION_SCHEMA_FILE_PATH_LD = "../conf/subscription-ld.schema.json"
 
+SUBSCRIPTION_SCHEMA_FILE_PATH_MQTT = os.getenv('SUBSCRIPTION_SCHEMA_FILE_PATH_MQTT')
+if SUBSCRIPTION_SCHEMA_FILE_PATH_MQTT is None:
+    print("SUBSCRIPTION_SCHEMA_FILE_PATH_MQTT env is missing. Reverting back to default value.")
+    SUBSCRIPTION_SCHEMA_FILE_PATH_MQTT = "../conf/subscription-mqtt.schema.json"
+
 ORION_VERSION = os.getenv('ORION_VERSION')
 if ORION_VERSION is None:
     print("ORION_VERSION env is missing. Reverting back to default value.")
     ORION_VERSION = "V2"
+
+ORION_SUBSCRIPTION = os.getenv('ORION_SUBSCRIPTION')
+if ORION_SUBSCRIPTION is None:
+    print("ORION_SUBSCRIPTION env is missing. Reverting back to default value.")
+    ORION_SUBSCRIPTION = "http"
 
 # Logger
 DEFAULT_LOG_FILENAME = "logs.log"
