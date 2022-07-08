@@ -19,7 +19,7 @@ class MQTTConsumer:
             client.on_message = self.on_message_ld
 
         client.connect(MQTT_HOST, MQTT_PORT, 60)
-        logger.info('Connected to mqtt instance at host:' + MQTT_HOST + ", port: " + MQTT_PORT )
+        logger.info('Connected to mqtt instance at host:' + str(MQTT_HOST) + ", port: " + str(MQTT_PORT) )
         # Blocking call that processes network traffic, dispatches callbacks and
         # handles reconnecting.
         # Other loop*() functions are available that give a threaded interface and a

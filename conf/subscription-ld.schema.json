@@ -90,6 +90,12 @@
             },
             "accept": {
               "type": "string"
+            },
+            "notifierInfo": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
             }
           },
           "required": ["uri"]
