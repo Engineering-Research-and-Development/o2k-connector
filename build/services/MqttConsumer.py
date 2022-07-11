@@ -19,7 +19,7 @@ class MQTTConsumer:
             client.on_message = self.on_message_ld
 
         client.connect(MQTT_HOST, MQTT_PORT, 60)
-        logger.info('Connected to mqtt instance at host:' + str(MQTT_HOST) + ", port: " + str(MQTT_PORT) )
+        logger.debug('Connected to mqtt instance at host:' + str(MQTT_HOST) + ", port: " + str(MQTT_PORT) )
         # Blocking call that processes network traffic, dispatches callbacks and
         # handles reconnecting.
         # Other loop*() functions are available that give a threaded interface and a
@@ -29,16 +29,16 @@ class MQTTConsumer:
     # The callback for when the client receives a CONNACK response from the server.
 
     def on_connect(self, client, userdata, flags, rc):
-        logger.info("Connected with result code "+str(rc))
+        logger.debug("Connected with result code "+str(rc))
 
         # Subscribing in on_connect() means that if we lose the connection and
         # reconnect then subscriptions will be renewed.
         client.subscribe(MQTT_TOPIC)
-        logger.info('mqtt subscription to topic: ' + MQTT_TOPIC)
+        logger.debug('mqtt subscription to topic: ' + MQTT_TOPIC)
 
     # The callback for when a PUBLISH message is received from the server.
     def on_message(self, client, userdata, msg):
-        logger.info('V2 mqtt notification incoming')
+        logger.debug('V2 mqtt notification incoming')
         service = str(FIWARE_SERVICE).lower()
         service_path = str(FIWARE_SERVICEPATH).replace('/', '').lower()
 
@@ -54,14 +54,14 @@ class MQTTConsumer:
 
             ngsi_message = data
 
-            logger.info("Producing data records to topic: " + str(ngsi_topic))
+            logger.debug("Producing data records to topic: " + str(ngsi_topic))
             logger.info(ngsi_message)
 
             producer.produce(topic=ngsi_topic, message=ngsi_message)
 
     # The LD callback for when a PUBLISH message is received from the server.
     def on_message_ld(self, client, userdata, msg):
-        logger.info('LD mqtt notification incoming')
+        logger.debug('LD mqtt notification incoming')
 
         for data in json.loads(msg.payload)['data']:
 
@@ -72,7 +72,7 @@ class MQTTConsumer:
 
             ngsi_message = data
 
-            logger.info("Producing data records to topic: " + str(ngsi_topic))
-            logger.info(ngsi_message)
+            logger.debug("Producing data records to topic: " + str(ngsi_topic))
+            logger.debug(ngsi_message)
 
             producer.produce(topic=ngsi_topic, message=ngsi_message)

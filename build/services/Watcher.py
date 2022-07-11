@@ -20,7 +20,7 @@ class EventHandler(FileSystemEventHandler):
             return
         else:
             self.last_modified = datetime.now()
-            logger.info(f'event type: {event.event_type}  path : {event.src_path}')
+            logger.debug(f'event type: {event.event_type}  path : {event.src_path}')
             if ORION_VERSION == 'V2':
                 self.subscription.updateOrionSubscription()
             else:
@@ -29,8 +29,8 @@ class EventHandler(FileSystemEventHandler):
 
 class Watcher:
     def run(self, subscription):
-        logger.info('Starting Watchdog')
-        logger.info('Watching dir: ' + SUBSCRIPTION_JSON_PATH)
+        logger.debug('Starting Watchdog')
+        logger.debug('Watching dir: ' + SUBSCRIPTION_JSON_PATH)
         event_handler = EventHandler(subscription)
         observer = Observer()
         observer.schedule(event_handler, SUBSCRIPTION_JSON_PATH, recursive=True)

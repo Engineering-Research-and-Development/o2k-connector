@@ -14,7 +14,7 @@ class Subscription:
         r = requests.patch(url + '/' + subscriptionId,
                            data=data, headers=headers)
         if r.status_code == 204:
-            logger.info('Subscription updated with id: ' + subscriptionId)
+            logger.debug('Subscription updated with id: ' + subscriptionId)
         else:
             logger.error('Subscription failed ' + str(r.content))
 
@@ -22,9 +22,9 @@ class Subscription:
         r = requests.post(url, data=data, headers=headers)
         if r.status_code == 201:
             subscriptionId = str(r.headers["location"].split("/")[3])
-            logger.info('Subscription success with id: ' + subscriptionId)
+            logger.debug('Subscription success with id: ' + subscriptionId)
             self.subscriptionsIds.append(subscriptionId)
-            logger.info('Saved subscription in cache: ' +
+            logger.debug('Saved subscription in cache: ' +
                         str(self.subscriptionsIds))
         else:
             logger.error('Subscription failed ' + str(r.content))
@@ -121,9 +121,9 @@ class Subscription:
             r = requests.post(url, data=jsonSubscription, headers=headers)
             if r.status_code == 201:
                 subscriptionId = str(r.headers["location"].split("/")[-1])
-                logger.info('Subscription success with id: ' + subscriptionId)
+                logger.debug('Subscription success with id: ' + subscriptionId)
                 self.subscriptionsIds.append(subscriptionId)
-                logger.info('Saved subscription in cache: ' +
+                logger.debug('Saved subscription in cache: ' +
                             str(self.subscriptionsIds))
             else:
                 logger.error('Subscription failed ' + str(r.content))
@@ -141,9 +141,9 @@ class Subscription:
         headers = {'Accept': 'application/json'}
         r = requests.delete(url, headers=headers)
         if r.status_code == 204:
-            logger.info('Subscription deleted with id: ' + subscriptionId)
+            logger.debug('Subscription deleted with id: ' + subscriptionId)
             self.subscriptionsIds = []
-            logger.info('Removed subscription from cache: ' +
+            logger.debug('Removed subscription from cache: ' +
                         str(self.subscriptionsIds))
             # Create new subscription request
             self.createOrionLDSubscription()
@@ -191,9 +191,9 @@ class Subscription:
             r = requests.post(url, data=jsonSubscription, headers=headers)
             if r.status_code == 201:
                 subscriptionId = str(r.headers["location"].split("/")[-1])
-                logger.info('Subscription success with id: ' + subscriptionId)
+                logger.debug('Subscription success with id: ' + subscriptionId)
                 self.subscriptionsIds.append(subscriptionId)
-                logger.info('Saved subscription in cache: ' + str(self.subscriptionsIds))
+                logger.debug('Saved subscription in cache: ' + str(self.subscriptionsIds))
             else:
                 logger.error('Subscription failed ' + str(r.content))
         else:

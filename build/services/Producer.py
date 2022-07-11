@@ -46,7 +46,7 @@ class Producer:
         if err is not None:
             logger.error("Delivery failed for Machine record {}: {}".format(msg.key(), err))
         else:
-            logger.info('Order record {} successfully produced to {} [{}] at offset {}'.format(
+            logger.debug('Order record {} successfully produced to {} [{}] at offset {}'.format(
                 msg.key(), msg.topic(), msg.partition(), msg.offset()))
 
     def produce(self, topic, message, key=1):

@@ -14,7 +14,7 @@ class Notification(object):
     @cherrypy.tools.json_out()
     @cherrypy.tools.json_in()
     def notify(self):
-        logger.info('V2 http notification incoming')
+        logger.debug('V2 http notification incoming')
         input_json = cherrypy.request.json
 
         service = str(FIWARE_SERVICE).lower()
@@ -32,8 +32,8 @@ class Notification(object):
 
             ngsi_message = data
 
-            logger.info("Producing data records to topic: " + str(ngsi_topic))
-            logger.info(ngsi_message)
+            logger.debug("Producing data records to topic: " + str(ngsi_topic))
+            logger.debug(ngsi_message)
 
             producer.produce(topic=ngsi_topic, message=ngsi_message)
 
@@ -41,7 +41,7 @@ class Notification(object):
     @cherrypy.tools.json_out()
     @cherrypy.tools.json_in()
     def notifyld(self, subscriptionId):
-        logger.info('LD http notification incoming')
+        logger.debug('LD http notification incoming')
         input_json = cherrypy.request.json
 
         for data in input_json['data']:
@@ -53,7 +53,7 @@ class Notification(object):
 
             ngsi_message = data
 
-            logger.info("Producing data records to topic: " + str(ngsi_topic))
-            logger.info(ngsi_message)
+            logger.debug("Producing data records to topic: " + str(ngsi_topic))
+            logger.debug(ngsi_message)
 
             producer.produce(topic=ngsi_topic, message=ngsi_message)

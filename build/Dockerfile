@@ -1,6 +1,9 @@
 FROM python:3.9.13-bullseye
 LABEL version="0.1"
 
+RUN apt update
+RUN apt install nano
+
 COPY requirements.txt requirements.txt 
 RUN pip install -r requirements.txt
 

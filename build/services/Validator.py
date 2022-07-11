@@ -27,5 +27,5 @@ class Validator:
         except Exception as err:
             logger.error(err)
             return False
-        logger.info("Valid subscription schema.")
+        logger.debug("Valid subscription schema.")
         return True
