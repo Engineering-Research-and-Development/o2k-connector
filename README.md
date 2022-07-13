@@ -8,12 +8,124 @@ O2K-Connector is a lightweight connector, built in Python, that enables context 
 ## Contents
 
 -   [Install](#install)
-    -   [Docker install](#docker---recommended)
+  -   [Configuration](#configuration)
+  -   [Docker Install](#docker---recommended)
 -   [API](#api)
 -   [Testing](#testing)
 -   [License](#license)
 
-## Getting Started - install
+## Configuration
+
+O2K-Connector can be fully customized and configured by the means of environment variables listed on __*o2k.env*__ file.
+
+<table role="table">
+    <thead>
+        <tr align="center">
+            <th>Environment variables</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr>
+          <td>LOG_LEVEL</td>
+          <td>Level of O2K Debug. Possible values: INFO, DEBUG, ERROR</td>
+      </tr>
+      <tr>
+          <td>LOGS_PATH</td>
+          <td>Path of O2K-Connector logs</td>
+      </tr>
+      <tr>
+          <td>O2K_HOST</td>
+          <td>Listener for O2K-Connector</td>
+      </tr>
+      <tr>
+          <td>O2K_PORT</td>
+          <td>Port of O2K-Connector</td>
+      </tr>
+      <tr>
+          <td>SCHEMA_URL</td>
+          <td>Kafka Schema url for avro messages</td>
+      </tr>
+      <tr>
+          <td>BOOTSTRAP_SERVERS</td>
+          <td>Kafka Boostrap Servers</td>
+      </tr>
+      <tr>
+          <td>KAFKA_TOPIC</td>
+          <td>User-specified Kafka Topic, if left blank, it will be auto-generated on the fly taking into account FIWARE_SERVICE and FIWARE_SERVICEPATH environments for NGSI V2 and entity id for NGSI-LD</td>
+      </tr>
+      <tr>
+          <td>ORION_HOST</td>
+          <td>Hostname of Orion Context Broker</td>
+      </tr>
+      <tr>
+          <td>ORION_PORT</td>
+          <td>Port of Orion Context Broker</td>
+      </tr>
+      <tr>
+          <td>FIWARE_SERVICE</td>
+          <td>Fiware Service for NGSI V2</td>
+      </tr>
+      <tr>
+          <td>FIWARE_SERVICEPATH</td>
+          <td>Fiware ServicePath for NGSI V2s</td>
+      </tr>
+      <tr>
+          <td>MQTT_HOST</td>
+          <td>Hostname of MQTT Server, if used</td>
+      </tr>
+      <tr>
+          <td>MQTT_PORT</td>
+          <td>Port of MQTT Server, if used</td>
+      </tr>
+      <tr>
+          <td>MQTT_TOPIC</td>
+          <td>Topic to which publish on MQTT Server, if used</td>
+      </tr>
+      <tr>
+          <td>SUBSCRIPTION_JSON_PATH</td>
+          <td>Path of subscription configuration files</td>
+      </tr>
+      <tr>
+          <td>SUBSCRIPTION_JSON_FILENAME</td>
+          <td>Filename of subscription configuration file for NGSI V2 subscription</td>
+      </tr>
+      <tr>
+          <td>SUBSCRIPTION_JSON_FILENAME_LD</td>
+          <td>Filename of subscription configuration file for NGSI-LD subscription</td>
+      </tr>
+      <tr>
+          <td>SUBSCRIPTION_JSON_FILENAME_MQTT</td>
+          <td>Filename of subscription configuration file for NGSI-V2 subscription and MQTT underlying subscription engine</td>
+      </tr>
+      <tr>
+          <td>SUBSCRIPTION_SCHEMA_FILE_PATH</td>
+          <td>Filename of subscription schema file for NGSI V2 subscription</td>
+      </tr>
+      <tr>
+          <td>SUBSCRIPTION_SCHEMA_FILE_PATH_LD</td>
+          <td>Filename of subscription schema file for NGSI-LD subscription</td>
+      </tr>
+      <tr>
+          <td>SUBSCRIPTION_SCHEMA_FILE_PATH_MQTT</td>
+          <td>Filename of subscription schema file for NGSI-V2 subscription and MQTT underlying subscription engine</td>
+      </tr>
+      <tr>
+          <td>ORION_VERSION</td>
+          <td>Orion Context Broker version. Possible values: V2, LD</td>
+      </tr>
+      <tr>
+          <td>ORION_SUBSCRIPTION</td>
+          <td>Orion Context Broker subscription engine. Possible values: http, mqtt</td>
+      </tr>
+      <tr>
+          <td>MULTIPLE_SUBSCRIPTIONS</td>
+          <td>For NGSI V2 only: set to "false" to handle a unique subscription with multiple attributes</td>
+      </tr>
+  </tbody>
+</table>
+
+## Getting Started - Install
 
 To instantiate O2K-Connector you can use docker-compose which will take care of the creation of the container running python. Alternatively you can locally run the connector by running the python script.
 
@@ -75,4 +187,3 @@ To text context-data consumpion, run kafka-console-consumer command:
 O2K-Connector is licensed under
 
 *GNU Affero General Public License v3.0*
-
