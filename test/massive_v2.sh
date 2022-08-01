@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Usage:
-# ./massive.sh EntityAttribute
+# ./massive_v2.sh CarEntityAttribute (eg. Engine_Oxigen)
 
-for i in {1..1000}
+for i in {1..300}
 do
    orion_response=$(curl -sS --location --request PUT 'http://orion:1026/v2/entities/age01_Car/attrs/'$1'?type=Device' \
    --header 'Accept: application/json' \

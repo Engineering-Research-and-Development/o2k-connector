@@ -63,7 +63,7 @@ class MQTTConsumer:
     def on_message_ld(self, client, userdata, msg):
         logger.debug('LD mqtt notification incoming')
 
-        for data in json.loads(msg.payload)['data']:
+        for data in json.loads(msg.payload)['body']['data']:
 
             ngsi_topic = KAFKA_TOPIC
             if KAFKA_TOPIC is None:
