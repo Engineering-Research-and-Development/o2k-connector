@@ -5,7 +5,7 @@ from confluent_kafka.serialization import StringSerializer
 from confluent_kafka.schema_registry import SchemaRegistryClient
 from confluent_kafka.schema_registry.avro import AvroSerializer
 from confluent_kafka.error import SerializationError
-from config.config import SCHEMA_URL, BOOTSTRAP_SERVERS
+from config.config import SCHEMA_URL, BOOTSTRAP_SERVERS, MULTIPLE_SUBSCRIPTIONS, FLATTEN
 from config.config import logger
 
 
@@ -56,6 +56,17 @@ class Producer:
             df_dict = message.to_dict('records')
 
         for row in df_dict:
+            if MULTIPLE_SUBSCRIPTIONS == "true" and FLATTEN == "true":
+                flatten_row = {}
+                flatten_row['id'] = row['id']
+                flatten_row['type'] = row['type']
+
+                keysList = list(row.keys())
+                attr_names = [a for a in keysList if a not in ['id', 'type']]
+                if len(attr_names) == 1:
+                    flatten_row['attr_name'] = attr_names[0]
+                    flatten_row['attr_data'] = row[attr_names[0]]
+                row = flatten_row
             self.producer.poll(0.0)
             try:
                 self.producer.produce(topic=topic, key=str(key), value=row, on_delivery=self.delivery_report)
