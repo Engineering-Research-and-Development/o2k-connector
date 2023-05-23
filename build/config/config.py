@@ -151,6 +151,27 @@ if ORION_SUBSCRIPTION is None:
     print("ORION_SUBSCRIPTION env is missing. Reverting back to default value.")
     ORION_SUBSCRIPTION = "http"
 
+KAFKA_ENABLE_SSL = os.getenv('KAFKA_ENABLE_SSL')
+if KAFKA_ENABLE_SSL is None:
+    print("KAFKA_ENABLE_SSL env is missing. Reverting back to default value.")
+    KAFKA_ENABLE_SSL = False
+
+KAFKA_SSL_CA = os.getenv('KAFKA_SSL_CA')
+if KAFKA_SSL_CA is None:
+    print("KAFKA_SSL_CA env is missing. Reverting back to default value.")
+    KAFKA_SSL_CA = "/o2k-connector/Certificates/CARoot.pem"
+
+KAFKA_SSL_KEY = os.getenv('KAFKA_SSL_KEY')
+if KAFKA_SSL_KEY is None:
+    print("KAFKA_SSL_KEY env is missing. Reverting back to default value.")
+    KAFKA_SSL_KEY = "/o2k-connector/Certificates/key.pem"
+
+KAFKA_SSL_CERTIFICATE = os.getenv('KAFKA_SSL_CERTIFICATE')
+if KAFKA_SSL_CERTIFICATE is None:
+    print("KAFKA_SSL_CERTIFICATE env is missing. Reverting back to default value.")
+    KAFKA_SSL_CERTIFICATE = "/o2k-connector/Certificates/certificate.pem"
+
+
 # Logger
 DEFAULT_LOG_FILENAME = "logs.log"
 

@@ -122,6 +122,22 @@ O2K-Connector can be fully customized and configured by the means of environment
           <td>MULTIPLE_SUBSCRIPTIONS</td>
           <td>For NGSI V2 only: set to "false" to handle a unique subscription with multiple attributes</td>
       </tr>
+      <tr>
+          <td>KAFKA_ENABLE_SSL</td>
+          <td>Set to "true" if want to use SSL connection to Kafka</td>
+      </tr>
+      <tr>
+          <td>KAFKA_SSL_CA</td>
+          <td>Certificate Authority key (path file inside the container) to use for SSL connection to Kafka</td>
+      </tr>
+      <tr>
+          <td>KAFKA_SSL_KEY</td>
+          <td>Client key (path file inside the container) to use for SSL connection to Kafka</td>
+      </tr>
+      <tr>
+          <td>KAFKA_SSL_CERTIFICATE</td>
+          <td>Certificate key (path file inside the container) to use for SSL connection to Kafka</td>
+      </tr>
   </tbody>
 </table>
 

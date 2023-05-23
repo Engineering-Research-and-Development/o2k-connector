@@ -5,7 +5,7 @@ from confluent_kafka.serialization import StringSerializer
 from confluent_kafka.schema_registry import SchemaRegistryClient
 from confluent_kafka.schema_registry.avro import AvroSerializer
 from confluent_kafka.error import SerializationError
-from config.config import SCHEMA_URL, BOOTSTRAP_SERVERS, MULTIPLE_SUBSCRIPTIONS, FLATTEN
+from config.config import SCHEMA_URL, BOOTSTRAP_SERVERS, MULTIPLE_SUBSCRIPTIONS, FLATTEN, KAFKA_ENABLE_SSL, KAFKA_SSL_CA, KAFKA_SSL_KEY, KAFKA_SSL_CERTIFICATE
 from config.config import logger
 
 
@@ -39,6 +39,12 @@ class Producer:
                          'key.serializer': StringSerializer('utf_8'),
                          'value.serializer': serializer,
                          'queue.buffering.max.messages': 1000000}
+
+        if KAFKA_ENABLE_SSL == True or KAFKA_ENABLE_SSL == 'true':
+            producer_conf['security.protocol'] = 'SSL'
+            producer_conf['ssl.ca.location'] = KAFKA_SSL_CA
+            producer_conf['ssl.key.location'] = KAFKA_SSL_KEY
+            producer_conf['ssl.certificate.location'] = KAFKA_SSL_CERTIFICATE
 
         self.producer = SerializingProducer(producer_conf)
 
