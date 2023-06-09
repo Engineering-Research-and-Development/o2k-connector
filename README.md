@@ -1,4 +1,12 @@
-# ![O2K-Connector](docs/images/o2k_logo.png) O2K-Connector
+# O2K-Connector: a FIWARE Orion to Kafka Connector
+
+[![](https://nexus.lab.fiware.org/static/badges/chapters/core.svg)](https://www.fiware.org/developers/catalogue/)
+[![License: AGPL](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://opensource.org/licenses/AGPL-3.0)
+[![Support badge](https://img.shields.io/badge/support-stackoverflow-orange)](https://stackoverflow.com/questions/tagged/fiware+o2k)<br/>
+![Status](https://nexus.lab.fiware.org/repository/raw/public/badges/statuses/incubating.svg)
+<br/>
+# ![O2K-Connector](docs/images/o2k_logo.png) 
+
 O2K-Connector is a lightweight connector, built in Python, that enables context data sharing from Orion Context Broker towards Apache Kafka. In more detail, O2K-Connector subscribes to Orion Context Broker and publishes the received context-data to a built-in kafka topic.
 
 ## O2K-Connector example placement in a FIWARE/Apache Architecture
