@@ -1,8 +1,13 @@
 FROM python:3.9.13-bullseye
 LABEL version="0.1"
 
-RUN apt update
-RUN apt install nano
+RUN apt-get update
+RUN  apt-get install -y --no-install-recommends nano gcc git libssl-dev g++ make && \
+  cd /tmp && git clone https://github.com/edenhill/librdkafka && \
+  cd librdkafka && git checkout tags/v2.0.2 && \
+  ./configure && make && make install && \
+  ldconfig && \
+  cd ../ && rm -rf librdkafka
 
 COPY requirements.txt requirements.txt 
 RUN pip install -r requirements.txt
