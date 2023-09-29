@@ -1,16 +1,20 @@
 # O2K-Connector: a FIWARE Orion to Kafka Connector
 
 [![](https://nexus.lab.fiware.org/static/badges/chapters/core.svg)](https://www.fiware.org/developers/catalogue/)
-[![License: AGPL](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://opensource.org/licenses/AGPL-3.0)
-[![Support badge](https://img.shields.io/badge/support-stackoverflow-orange)](https://stackoverflow.com/questions/tagged/fiware+o2k)<br/>
+[![License badge](https://img.shields.io/github/license/Engineering-Research-and-Development/o2k-connector.svg)](https://opensource.org/licenses/AGPL-3.0)
+[![](https://img.shields.io/badge/tag-fiware+o2k-orange.svg?logo=stackoverflow)](http://stackoverflow.com/questions/tagged/fiware+o2k)<br/>
+[![Quay badge](https://img.shields.io/badge/quay.io-fiware%2Fo2k--connector-grey?logo=red%20hat&labelColor=EE0000)](https://quay.io/repository/fiware/o2k-connector/)
+[![Docker badge](https://img.shields.io/badge/docker-rdlabengpa%2Fo2k--connector-blue?logo=docker)](https://registry.hub.docker.com/r/rdlabengpa/o2k-connector)
+<br/>
 ![Status](https://nexus.lab.fiware.org/repository/raw/public/badges/statuses/incubating.svg)
 <br/>
 <img align="right" width="150" src="/docs/images/o2k_logo.png" /> 
 
 O2K-Connector is a lightweight connector, built in Python, that enables context data sharing from Orion Context Broker towards Apache Kafka. In more detail, O2K-Connector subscribes to Orion Context Broker and publishes the received context-data to a built-in kafka topic.
+<br/>
 
-<br/>
-<br/>
+| <img style="height:1em" src="https://quay.io/static/img/quay_favicon.png"/> [quay.io](https://quay.io/repository/fiware/o2k-connector) | :whale: [Docker Hub](https://hub.docker.com/r/rdlabengpa/o2k-connector) | 
+|---|---|
 
 ## O2K-Connector example placement in a FIWARE/Apache Architecture
 
