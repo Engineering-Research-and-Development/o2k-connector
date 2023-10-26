@@ -3,7 +3,7 @@
 [![](https://nexus.lab.fiware.org/static/badges/chapters/core.svg)](https://www.fiware.org/developers/catalogue/)
 [![License badge](https://img.shields.io/github/license/Engineering-Research-and-Development/o2k-connector.svg)](https://opensource.org/licenses/AGPL-3.0)
 [![](https://img.shields.io/badge/tag-fiware+o2k-orange.svg?logo=stackoverflow)](http://stackoverflow.com/questions/tagged/fiware+o2k)<br/>
-[![Quay badge](https://img.shields.io/badge/quay.io-fiware%2Fo2k--connector-grey?logo=red%20hat&labelColor=EE0000)](https://quay.io/repository/fiware/o2k-connector/)
+[![Quay badge](https://img.shields.io/badge/quay.io-fiware%2Fo2k--connector-grey?logo=red%20hat&labelColor=EE0000)](https://quay.io/repository/fiware/o2k-connector)
 [![Docker badge](https://img.shields.io/badge/docker-rdlabengpa%2Fo2k--connector-blue?logo=docker)](https://registry.hub.docker.com/r/rdlabengpa/o2k-connector)
 <br/>
 ![Status](https://nexus.lab.fiware.org/repository/raw/public/badges/statuses/incubating.svg)
