@@ -2,10 +2,11 @@ import paho.mqtt.client as mqtt
 import json
 from config.config import MQTT_HOST, MQTT_PORT, MQTT_TOPIC, KAFKA_TOPIC, FIWARE_SERVICE, FIWARE_SERVICEPATH, ORION_VERSION
 from config.config import logger
-from services.Producer import Producer
+from services.Producer import KafkaProducer
+from services.ConfigParameterChecker import checkDBParameters
 
-producer = Producer()
 
+producer = KafkaProducer()
 
 class MQTTConsumer:
     def __init__(self, message_format='json', schema=None):
