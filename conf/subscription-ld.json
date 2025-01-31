@@ -19,7 +19,7 @@
     ],
     "format": "keyValues",
     "endpoint": {
-      "uri": "http://o2k-connector:5050/notifyld"
+      "uri": "http://o2k-connector:5050/notifyld/kafka"
     }
   },
   "@context": "https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld"

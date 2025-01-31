@@ -1,4 +1,4 @@
-FROM python:3.9.13-bullseye
+FROM python:3.11.5
 LABEL version="0.1"
 
 RUN apt-get update
@@ -15,6 +15,7 @@ RUN pip install -r requirements.txt
 RUN mkdir /o2k-connector
 RUN mkdir /o2k-connector/data
 RUN mkdir /o2k-connector/logs
+RUN mkdir /o2k-connector/files
 
 COPY . /o2k-connector
 

@@ -32,14 +32,12 @@ else:
         O2K_PORT = 5050
 
 SCHEMA_URL = os.getenv('SCHEMA_URL')
-if SCHEMA_URL is None:
-    print("SCHEMA_URL env is missing. Reverting back to default value.")
-    SCHEMA_URL = "http://schema-registry:8081"
+if SCHEMA_URL == "":
+    print("SCHEMA_URL env is missing.")
 
 BOOTSTRAP_SERVERS = os.getenv('BOOTSTRAP_SERVERS')
-if BOOTSTRAP_SERVERS is None:
-    print("BOOTSTRAP_SERVERS env is missing. Reverting back to default value.")
-    BOOTSTRAP_SERVERS = "localhost:9092,localhost:9093,localhost:9094"
+if BOOTSTRAP_SERVERS == "":
+    print("BOOTSTRAP_SERVERS env is missing.")
 
 KAFKA_TOPIC = os.getenv('KAFKA_TOPIC')
 if KAFKA_TOPIC is None:
@@ -171,6 +169,157 @@ if KAFKA_SSL_CERTIFICATE is None:
     print("KAFKA_SSL_CERTIFICATE env is missing. Reverting back to default value.")
     KAFKA_SSL_CERTIFICATE = "/o2k-connector/Certificates/certificate.pem"
 
+#PostgreSQL Configuration
+
+POSTGRES_HOSTNAME = os.getenv('POSTGRES_HOSTNAME')
+if POSTGRES_HOSTNAME == "":
+    print("POSTGRES_HOSTNAME env is missing. Reverting back to default value.")
+    POSTGRES_HOSTNAME = "localhost"
+
+POSTGRES_PORT = os.getenv('POSTGRES_PORT')
+if POSTGRES_PORT == "":
+    print("POSTGRES_PORT env is missing. Reverting back to default value.")
+    POSTGRES_PORT = 5432
+else:
+    try:
+        POSTGRES_PORT = int(POSTGRES_PORT)
+    except ValueError:
+        print("POSTGRES_PORT env could not be casted into Integer. Reverting back to default value.")
+        POSTGRES_PORT = 5432
+
+POSTGRES_USERNAME = os.getenv('POSTGRES_USERNAME')
+if POSTGRES_USERNAME == "":
+    print("POSTGRES_USERNAME env is missing. Reverting back to default value.")
+    POSTGRES_USERNAME = "postgres"
+
+POSTGRES_PASS = os.getenv('POSTGRES_PASS')
+if POSTGRES_PASS == "":
+    print("POSTGRES_PASS env is missing.")
+
+#MongoDB Configuration
+
+MONGODB_URL = os.getenv('MONGODB_URL')
+if MONGODB_URL == "":
+    print("MONGODB_URL env is missing.")
+
+#Minio Configuration
+
+MINIO_HOSTNAME = os.getenv('MINIO_HOSTNAME')
+if MINIO_HOSTNAME == "":
+    print("MINIO_HOSTNAME env is missing. Reverting back to default value.")
+    MINIO_HOSTNAME = "localhost"
+
+MINIO_PORT = os.getenv('MINIO_PORT')
+if MINIO_PORT == "":
+    print("MINIO_PORT env is missing. Reverting back to default value.")
+    MINIO_PORT = 9000
+else:
+    try:
+        MINIO_PORT = int(MINIO_PORT)
+    except ValueError:
+        print("MINIO_PORT env could not be casted into Integer. Reverting back to default value.")
+        MINIO_PORT = 9000
+
+MINIO_USERNAME = os.getenv('MINIO_USERNAME')
+if MINIO_USERNAME == "":
+    print("MINIO_USERNAME env is missing.")
+
+MINIO_PASS = os.getenv('MINIO_PASS')
+if MINIO_PASS == "":
+    print("MINIO_PASS env is missing.")
+
+#MySQL Configuration
+
+MYSQL_HOSTNAME = os.getenv('MYSQL_HOSTNAME')
+if MYSQL_HOSTNAME == "":
+    print("MYSQL_HOSTNAME env is missing. Reverting back to default value.")
+    MYSQL_HOSTNAME = "localhost"
+
+MYSQL_PORT = os.getenv('MYSQL_PORT')
+if MYSQL_PORT == "":
+    print("MYSQL_PORT env is missing. Reverting back to default value.")
+    MYSQL_PORT = 3306
+else:
+    try:
+        MYSQL_PORT = int(MYSQL_PORT)
+    except ValueError:
+        print("MYSQL_PORT env could not be casted into Integer. Reverting back to default value.")
+        MYSQL_PORT = 3306
+
+MYSQL_USERNAME = os.getenv('MYSQL_USERNAME')
+if MYSQL_USERNAME == "":
+    print("MYSQL_USERNAME env is missing")
+
+MYSQL_ROOT_PASS = os.getenv('MYSQL_ROOT_PASS')
+if MYSQL_ROOT_PASS == "":
+    print("MYSQL_ROOT_PASS env is missing")
+
+SKIP_AUTO_SUBSCRIPTION = os.getenv('SKIP_AUTO_SUBSCRIPTION')
+if SKIP_AUTO_SUBSCRIPTION == "":
+    print("SKIP_AUTO_SUBSCRIPTION env is missing. Reverting back to default value.")
+    SKIP_AUTO_SUBSCRIPTION = False
+else:
+    try:
+        SKIP_AUTO_SUBSCRIPTION = bool(SKIP_AUTO_SUBSCRIPTION)
+    except ValueError:
+        print("SKIP_AUTO_SUBSCRIPTION env could not be casted into Boolean. Reverting back to default value.")
+        SKIP_AUTO_SUBSCRIPTION = False
+
+# InfluxDB Configuration
+
+INFLUX_URL = os.getenv('INFLUX_URL')
+if INFLUX_URL == "":
+    print("INFLUX_URL env is missing.")
+
+INFLUX_ORG = os.getenv('INFLUX_ORG')
+if INFLUX_ORG == "":
+    print("INFLUX_ORG env is missing.")
+
+INFLUX_TOKEN = os.getenv('INFLUX_TOKEN')
+if INFLUX_TOKEN == "":
+    print("INFLUX_TOKEN env is missing.")
+
+# Keycloak Configuration
+
+ENABLE_KEYCLOAK_AUTH = os.getenv('ENABLE_KEYCLOAK_AUTH')
+if ENABLE_KEYCLOAK_AUTH == "":
+    print("ENABLE_KEYCLOAK_AUTH env is missing. Reverting back to default value.")
+    ENABLE_KEYCLOAK_AUTH = False
+else:
+    try:
+        ENABLE_KEYCLOAK_AUTH = bool(ENABLE_KEYCLOAK_AUTH)
+    except ValueError:
+        print("ENABLE_KEYCLOAK_AUTH env could not be casted into Boolean. Reverting back to default value.")
+        ENABLE_KEYCLOAK_AUTH = False
+
+KEYCLOAK_GRANT_TYPE = os.getenv('KEYCLOAK_GRANT_TYPE')
+if KEYCLOAK_GRANT_TYPE == "":
+    print("KEYCLOAK_GRANT_TYPE env is missing. Reverting back to default value.")
+    KEYCLOAK_GRANT_TYPE = "client_credentials"
+
+KEYCLOAK_URL = os.getenv('KEYCLOAK_URL')
+if KEYCLOAK_URL == "":
+    print("KEYCLOAK_URL env is missing.")
+
+KEYCLOAK_CLIENT_ID = os.getenv('KEYCLOAK_CLIENT_ID')
+if KEYCLOAK_CLIENT_ID == "":
+    print("KEYCLOAK_CLIENT_ID env is missing.")
+
+KEYCLOAK_REALM = os.getenv('KEYCLOAK_REALM')
+if KEYCLOAK_REALM == "":
+    print("KEYCLOAK_REALM env is missing.")
+
+KEYCLOAK_USERNAME = os.getenv('KEYCLOAK_USERNAME')
+if KEYCLOAK_USERNAME == "":
+    print("KEYCLOAK_USERNAME env is missing.")
+
+KEYCLOAK_PASSWORD = os.getenv('KEYCLOAK_PASSWORD')
+if KEYCLOAK_PASSWORD == "":
+    print("KEYCLOAK_PASSWORD env is missing.")
+
+KEYCLOAK_CLIENT_SECRET = os.getenv('KEYCLOAK_CLIENT_SECRET')
+if KEYCLOAK_CLIENT_SECRET == "":
+    print("KEYCLOAK_CLIENT_SECRET env is missing.")
 
 # Logger
 DEFAULT_LOG_FILENAME = "logs.log"
